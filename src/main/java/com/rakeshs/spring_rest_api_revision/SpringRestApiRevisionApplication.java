@@ -8,6 +8,7 @@ public class SpringRestApiRevisionApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringRestApiRevisionApplication.class, args);
+		System.out.println("Testing");
 	}
 
 }
