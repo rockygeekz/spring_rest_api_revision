@@ -35,4 +35,37 @@ public class Empservice {
     }
 
 
-}
+    public Employee updateEmployee(Long id, Employee updatedEmployee) {
+        return employeeRepository.findById(id)
+                .map(existingEmployee -> {
+                    existingEmployee.setName(updatedEmployee.getName());
+                    existingEmployee.setEmail(updatedEmployee.getEmail());
+                    existingEmployee.setDepartment(updatedEmployee.getDepartment());
+                    // Add any other fields to update
+                    return employeeRepository.save(existingEmployee);
+                })
+                .orElseThrow(() -> new EntityNotFoundException("Employee with ID " + id + " not found"));
+    }
+
+
+//    public Employee updateEmployee(Long id, Employee employee) {
+//        Optional<Employee> optionalEmployee = employeeRepository.findById(id);
+//
+//        if (optionalEmployee.isPresent()) {
+//            Employee existingEmployee = optionalEmployee.get();
+//
+//            existingEmployee.setEmail(employee.getEmail());
+//            existingEmployee.setName(employee.getName());
+//            existingEmployee.setPhone(employee.getPhone());
+//            existingEmployee.setDepartment(employee.getDepartment());
+//
+//            return employeeRepository.save(existingEmployee);
+//        }
+//
+//        return null;
+    }
+
+
+
+
+

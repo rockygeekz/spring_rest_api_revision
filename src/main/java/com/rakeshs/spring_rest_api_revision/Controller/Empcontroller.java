@@ -56,4 +56,28 @@ public class Empcontroller {
         }
     }
 
+    @PutMapping("/employee/{id}")
+    public ResponseEntity<?> updateEmployee(@PathVariable Long id, @RequestBody Employee employee) {
+        try {
+            Employee updatedEmp = empservice.updateEmployee(id, employee);
+            return new ResponseEntity<>(updatedEmp, HttpStatus.OK);
+        } catch (EntityNotFoundException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
+
+
+//@PatchMapping("/employee/{id}")
+//public ResponseEntity<?> updateEmployee(@PathVariable Long id, @RequestBody Employee employee) {
+//    Employee updatedEmployee = employeeService.updateEmployee(id, employee);
+//
+//    if (updatedEmployee == null) {
+//        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+//    }
+//
+//    return ResponseEntity.ok(updatedEmployee);
+//}
+
+
 }
